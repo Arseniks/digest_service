@@ -17,6 +17,11 @@ uvicorn = "^0.23.0"
 fastapi = "^0.100.0"
 python-dotenv = "^1.0.0"
 pydantic-settings = "^2.0.2"
+sqlalchemy = "^2.0.19"
+alembic = "^1.11.1"
+asyncpg = "^0.28.0"
+greenlet = "^2.0.2"
+psycopg2 = "^2.9.6"
 
 [tool.poetry.dev-dependencies]
 black = "^23.1.0"

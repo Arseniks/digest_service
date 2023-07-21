@@ -33,4 +33,4 @@ jobs:
       uses: isort/isort-action@master
     - name: Lint with Black
       run: |
-        poetry run black --check --verbose education_time_management
+        poetry run black --check --verbose digest_service

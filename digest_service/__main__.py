@@ -2,9 +2,9 @@
 import argparse
 
 import uvicorn
-from fastapi import FastAPI
 
 from digest_service.config import settings
+from digest_service.endpoints import app
 
 
 def main() -> None:
@@ -27,12 +27,9 @@ def main() -> None:
         type=int,
         help=f"привязать сокет к этому порту [по умолчанию: {settings.BACKEND_PORT}]",
     )
-    parser.add_argument("--reload")
     args = parser.parse_args()
     settings.DB_CONNECTION_URI = args.db_connection_uri
     settings.BACKEND_URL_WITH_PORT = f"{settings.BACKEND_URL}:{args.port}"
-
-    app = FastAPI()
 
     uvicorn.run(
         app,

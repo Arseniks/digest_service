@@ -3,6 +3,7 @@ from __future__ import annotations
 from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncEngine, AsyncSession, create_async_engine
 
 from digest_service.config import settings
+from digest_service.db.base import Base
 
 
 class DbConfig:
@@ -25,10 +26,19 @@ class DbConfig:
             self.engine = create_async_engine(settings.DB_CONNECTION_URI, echo=False)
         return self.engine
 
-    def session_factory(self):
+    def session_factory(self) -> AsyncSession:
         """Получение сессии подключения к базе"""
         engine = self.get_engine()
-        return async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
+        return async_sessionmaker(engine)()
+
+    async def get_db(self):
+        async with self.get_engine().begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
+        db = self.session_factory()
+        try:
+            yield db
+        finally:
+            await db.close()
 
 
 DB_DATA = DbConfig(db_connection_uri=settings.DB_CONNECTION_URI)

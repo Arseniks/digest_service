@@ -7,7 +7,7 @@ from uuid import UUID
 from sqlalchemy import Column, ForeignKey, Table
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from digest_service.db.base import Base
+from digest_service.db.db_config import Base
 
 digest_post = Table(
     "digest_post",

@@ -14,7 +14,6 @@ app = FastAPI()
 async def get_digest(user_id: UUID, db: AsyncSession = Depends(DB_DATA.get_db)):
     """Получение дейджайста по id пользователя"""
     user_subscription_ids = await db.execute(
-        select(Post).where(Subscription.user_id == user_id).join(Subscription).filter(Post.popularity > 50)
+        select(Post).join(Subscription).where(Post.popularity >= 50, Subscription.user_id == user_id)
     )
-
     return user_subscription_ids.scalars().all()

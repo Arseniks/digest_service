@@ -7,7 +7,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from digest_service.db.db_config import DB_DATA
 from digest_service.db.schema import Post, Subscription
 
-
 app = FastAPI()
 
 

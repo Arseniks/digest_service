@@ -1,9 +1,9 @@
 import uuid
 from typing import List
+from uuid import UUID
 
 from sqlalchemy import Column, ForeignKey, Table
-from uuid import UUID
-from sqlalchemy.orm import relationship, Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from digest_service.db.base import Base
 
@@ -46,6 +46,5 @@ class Digest(Base):
     __tablename__ = "digest"
 
     digest_id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
-    posts:  Mapped[List["Post"]] = relationship(secondary=digest_post)
+    posts: Mapped[List["Post"]] = relationship(secondary=digest_post)
     user: Mapped[List["User"]] = relationship()
-

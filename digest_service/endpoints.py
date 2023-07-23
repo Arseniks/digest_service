@@ -11,7 +11,7 @@ app = FastAPI()
 
 
 @app.get("/get_digest/{user_id}/")
-async def get_digest(user_id: UUID, db: AsyncSession = Depends(DB_DATA.get_db)):
+async def get_digest(user_id: UUID, db: AsyncSession = Depends(DB_DATA.get_async_session)):
     """Получение дейджайста по id пользователя"""
     user_subscription_ids = await db.execute(
         select(Post).join(Subscription).where(Post.popularity >= 50, Subscription.user_id == user_id)

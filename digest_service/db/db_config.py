@@ -1,9 +1,13 @@
 from __future__ import annotations
 
 from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncEngine, AsyncSession, create_async_engine
+from sqlalchemy.orm import DeclarativeBase
 
 from digest_service.config import settings
-from digest_service.db.base import Base
+
+
+class Base(DeclarativeBase):
+    pass
 
 
 class DbConfig:

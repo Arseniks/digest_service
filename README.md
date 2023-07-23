@@ -29,6 +29,16 @@ git clone https://github.com/Arseniks/digest_service
 ```commandline
 cd digest_service
 ```
+## Запуск проекта с помощью Docker-a
+- Создаем контейнер
+```
+docker compose build
+```
+- Запускаем контейнер
+```
+docker compose up 
+```
+
 ## Запуск проекта вручную
 ### На Windows
 - Скопируйте файл .env.template в .env, при необходимости отредактируйте 

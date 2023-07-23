@@ -1,3 +1,4 @@
+"""Схемы таблиц и связей бд"""
 from __future__ import annotations
 
 import uuid

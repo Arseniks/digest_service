@@ -1,3 +1,4 @@
+"""Конфигурация и настройка бд"""
 from __future__ import annotations
 
 from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncEngine, AsyncSession, create_async_engine
@@ -36,6 +37,7 @@ class DbConfig:
         return async_sessionmaker(engine)()
 
     async def get_db(self):
+        """Получение бд"""
         async with self.get_engine().begin() as conn:
             await conn.run_sync(Base.metadata.create_all)
         db = self.session_factory()

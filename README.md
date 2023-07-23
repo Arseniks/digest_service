@@ -68,10 +68,6 @@ poetry install
 ```
 alembic upgrade head
 ```
-- Запуск проекта
-```
-python -m digest_service   
-```
 ### На Linux/Mac
 - Скопируйте файл .env.template в .env, при необходимости отредактируйте значения переменных:
 ```
@@ -97,9 +93,11 @@ poetry install
 ```
 alembic upgrade head
 ```
-- Запуск проекта
-```
-python3 -m digest_service   
-```
-
-
+### Запуск сервиса
+    usage: digest_service [-h] [--db_connection_uri DB_CONNECTION_URI] [--port PORT]
+      
+    options:
+      -h, --help                            показать это сообщение
+      --db_connection_uri DB_CONNECTION_URI полный URI для бд PostgreSQL 
+                                            [по умолчанию: postgresql+asyncpg://postgres:postgres@localhost:5432/dev_db]
+      --port PORT                           привязать сокет к этому порту [по умолчанию: 5001]

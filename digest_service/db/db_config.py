@@ -14,13 +14,6 @@ class Base(DeclarativeBase):
 class DbConfig:
     """Класс конфигурации подключения к базе данных"""
 
-    _self = None
-
-    def __new__(cls, *args, **kwargs) -> DbConfig:  # noqa:ANN002, ANN003
-        if cls._self is None:
-            cls._self = super().__new__(cls)
-        return cls._self
-
     def __init__(self, db_connection_uri: str) -> None:
         self.db_uri = db_connection_uri
         self.engine = None
@@ -36,15 +29,10 @@ class DbConfig:
         engine = self.get_engine()
         return async_sessionmaker(engine)()
 
-    async def get_db(self):
-        """Получение бд"""
-        async with self.get_engine().begin() as conn:
-            await conn.run_sync(Base.metadata.create_all)
+    async def get_async_session(self):
         db = self.session_factory()
-        try:
-            yield db
-        finally:
-            await db.close()
+        async with db as session:
+            yield session
 
 
 DB_DATA = DbConfig(db_connection_uri=settings.DB_CONNECTION_URI)

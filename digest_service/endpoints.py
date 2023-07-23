@@ -1,3 +1,4 @@
+"""Ручки приложения"""
 from uuid import UUID
 
 from fastapi import Depends, FastAPI

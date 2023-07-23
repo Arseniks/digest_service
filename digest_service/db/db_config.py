@@ -1,3 +1,4 @@
+"""Конфигурация и настройка бд"""
 from __future__ import annotations
 
 from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncEngine, AsyncSession, create_async_engine

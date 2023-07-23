@@ -4,6 +4,8 @@ services:
     image: postgres:15
     container_name: db_app
     command: -p 1221
+    volumes:
+      - ./postgres-data:/var/lib/postgresql
     expose:
       - 1221
     env_file:
